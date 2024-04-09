@@ -55,7 +55,6 @@ function App() {
 			)}
 			{isLoading && <Loader />}
 			{error && <ErrorMessage message={error} />}
-			{/* <ImageModal /> */}
 			<LoadMoreBtn onClick={fetchImages} />
 		</div>
 	);
