@@ -1,14 +1,14 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 const SearchBar = ({ onSubmit }) => {
 	const [query, setQuery] = useState('');
-	// const { Toast } = useToasts();
 
 	const handleSearch = (event) => {
 		event.preventDefault();
 		if (query.trim() !== '') {
 			onSubmit(query);
 		} else {
-			Toast('Please enter a search term');
+			toast('Please enter a search term');
 		}
 	};
 	return (

@@ -15,7 +15,9 @@ function App() {
 	const [images, setImages] = useState([]);
 	const [searchQuery, setSearchQuery] = useState('');
 	const [page, setPage] = useState(1);
-	const { Toast } = useToasts();
+	const [selectedImage, setSelectedImage] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState(null);
 
 	const fetchImages = async () => {
 		try {
@@ -26,7 +28,15 @@ function App() {
 			setPage((prevPages) => prevPages + 1);
 		} catch (error) {
 			console.error('Error fetching images:', error);
+			setError('Error fetching images');
 		}
+		setIsLoading(false);
+	};
+	const handleImageSelect = (image) => {
+		setSelectedImage(image);
+	};
+	const handleCloseModal = () => {
+		setSelectedImage(null);
 	};
 	const handleSearchSubmit = (query) => {
 		if (query.trim() !== '') {
@@ -39,11 +49,14 @@ function App() {
 	return (
 		<div className="App">
 			<SearchBar onSubmit={handleSearchSubmit} />
-			<ImageGallery images={images} onSelect={handleImageSubmit} />
-			<Loader />
-			<ErrorMessage />
-			<ImageModal />
-			<LoadMoreBtn />
+			<ImageGallery images={images} onSelect={handleImageSelect} />
+			{selectedImage && (
+				<ImageModal image={selectedImage} onClose={handleCloseModal} />
+			)}
+			{isLoading && <Loader />}
+			{error && <ErrorMessage message={error} />}
+			{/* <ImageModal /> */}
+			<LoadMoreBtn onClick={fetchImages} />
 		</div>
 	);
 }
