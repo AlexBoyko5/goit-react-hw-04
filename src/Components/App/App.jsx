@@ -6,7 +6,7 @@ import ImageGallery from '../ImageGallery/ImageGallery';
 import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import ImageModal from '../ImageModal/ImageModal';
-import LoadBtnTemp from '../LoadBtnTemp/LoadBtnTemp';
+import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 import toast from 'react-hot-toast';
 import './App.css';
 import 'modern-normalize';
@@ -55,7 +55,7 @@ function App() {
 			)}
 			{isLoading && <Loader />}
 			{error && <ErrorMessage message={error} />}
-			<LoadBtnTemp onClick={fetchImages} />
+			<LoadMoreBtn onClick={fetchImages} />
 		</div>
 	);
 }
