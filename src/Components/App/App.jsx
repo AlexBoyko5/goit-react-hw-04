@@ -8,6 +8,7 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import ImageModal from '../ImageModal/ImageModal';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 import toast from 'react-hot-toast';
+//Нормализ стилей
 import './App.css';
 import 'modern-normalize';
 
