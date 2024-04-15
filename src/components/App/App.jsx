@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import SearchBar from '../SearchBar/SearchBar';
@@ -42,12 +42,19 @@ function App() {
 	const handleCloseModal = () => {
 		setSelectedImage(null);
 	};
+	//====== use effect ====
+	useEffect(() => {
+		if (searchQuery) {
+			fetchImages();
+		}
+	}, [searchQuery, page]);
+	//======================
 	const handleSearchSubmit = (query) => {
 		if (query.trim() !== '') {
 			setImages([]);
 			setSearchQuery(query);
 			setPage(1);
-			fetchImages(query);
+			// fetchImages(query);
 		} else {
 			toast('Please enter a search term');
 		}
