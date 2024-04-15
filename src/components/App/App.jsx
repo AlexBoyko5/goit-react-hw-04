@@ -19,14 +19,17 @@ function App() {
 	const [selectedImage, setSelectedImage] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
+	const [showLoadMore, setShowLoadMore] = useState(false);
 
 	const fetchImages = async () => {
+		setIsLoading(true);
 		try {
 			const response = await axios.get(
 				`https://api.unsplash.com/search/photos?query=${searchQuery}&page=${page}&client_id=E9gUoXzHrMXiPVduDPHOe50tmZm2vFUStYbYeL0wKhs`
 			);
 			setImages((prevImages) => [...prevImages, ...response.data.results]);
 			setPage((prevPages) => prevPages + 1);
+			setShowLoadMore(response.data.results.length > 0);
 		} catch (error) {
 			console.error('Error fetching images:', error);
 			setError('Error fetching images');
@@ -41,7 +44,9 @@ function App() {
 	};
 	const handleSearchSubmit = (query) => {
 		if (query.trim() !== '') {
+			setImages([]);
 			setSearchQuery(query);
+			setPage(1);
 			fetchImages(query);
 		} else {
 			toast('Please enter a search term');
@@ -56,7 +61,7 @@ function App() {
 			)}
 			{isLoading && <Loader />}
 			{error && <ErrorMessage message={error} />}
-			<LoadMoreBtn onClick={fetchImages} />
+			{showLoadMore && !isLoading && <LoadMoreBtn onClick={fetchImages} />}
 		</div>
 	);
 }
