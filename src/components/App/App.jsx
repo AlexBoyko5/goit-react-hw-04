@@ -47,7 +47,7 @@ function App() {
 		if (searchQuery) {
 			fetchImages();
 		}
-	}, [searchQuery, page]);
+	}, [searchQuery]);
 	//======================
 	const handleSearchSubmit = (query) => {
 		if (query.trim() !== '') {
