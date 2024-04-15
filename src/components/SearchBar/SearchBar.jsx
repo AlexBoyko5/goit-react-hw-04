@@ -9,6 +9,7 @@ const SearchBar = ({ onSubmit }) => {
 		event.preventDefault();
 		if (query.trim() !== '') {
 			onSubmit(query);
+			event.target.reset();
 		} else {
 			toast('Please enter a search term');
 		}
